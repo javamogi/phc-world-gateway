@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    gateway:
+      httpclient:
+        connect-timeout: 1000
+        response-timeout: 5s
+#      routes:
+#        - id: path_simple_hello
+#          uri: http://localhost:8080
+#          predicates:
+#            - Path=/hello
+#spring:
+#  main:
+#    web-application-type: reactive
+server:
+  port: 9090
+
+route:
+  order-api:
+    v1:
+      base-url: http://localhost:8082
