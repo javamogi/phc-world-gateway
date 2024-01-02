@@ -4,6 +4,21 @@ spring:
       httpclient:
         connect-timeout: 1000
         response-timeout: 5s
+#      default-filters:
+#        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+#      globalcors:
+#        cors-configurations:
+#          '[/**]':
+#            allowedOrigins: 'http://localhost:3000'
+#            allow-credentials: true
+#            allowedHeaders: '*'
+#            allowedMethods:
+#              - GET
+#              - POST
+#              - PUT
+#              - DELETE
+#              - PATCH
+#              - OPTIONS
 #      routes:
 #        - id: path_simple_hello
 #          uri: http://localhost:8080
@@ -16,6 +31,6 @@ server:
   port: 9090
 
 route:
-  order-api:
+  user-api:
     v1:
-      base-url: http://localhost:8082
+      base-url: http://localhost:8080
