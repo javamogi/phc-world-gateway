@@ -1,5 +1,6 @@
 package com.phcworldgateway.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
@@ -7,7 +8,8 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RouteConfiguration {
-    public static final String MICROSERVICE_HOST_8080 = "http://localhost:8080";
+//    public static final String MICROSERVICE_HOST_8080 = "http://localhost:8080";
+    public static final String MICROSERVICE_HOST_8080 = "lb://USER-API-SERVICE";
     public static final String ECHO_HTTP_BIN = "http://httpbin.org:80";
 
     @Bean

@@ -1,4 +1,9 @@
+server:
+  port: 8000
+
 spring:
+  application:
+    name: phc-world-gateway
   cloud:
     gateway:
       httpclient:
@@ -24,13 +29,17 @@ spring:
 #          uri: http://localhost:8080
 #          predicates:
 #            - Path=/hello
-#spring:
-#  main:
-#    web-application-type: reactive
-server:
-  port: 9090
+#          filters:
+#            - CustomFilter
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
 route:
   user-api:
     v1:
-      base-url: http://localhost:8080
+      base-url: lb://USER-API-SERVICE

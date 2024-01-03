@@ -1,8 +1,8 @@
 ### Hello
-GET http://localhost:9090/hello
+GET http://localhost:8000/hello
 
 ### Microservice Hello
-GET http://localhost:9090/gateway-hello
+GET http://localhost:8000/gateway-hello
 
 ### Add Header Test
-GET http://localhost:9090/get
+GET http://localhost:8000/get

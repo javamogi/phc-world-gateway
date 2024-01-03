@@ -17,7 +17,7 @@ public class UserApiRouteLocator {
     @Bean
     public RouteLocator userRouteLocator(RouteLocatorBuilder builder){
         return builder.routes()
-                .route("user-api",
+                .route("user-api-service",
                         r -> r.path(gatewayPath + "**")
                         .filters(f ->
                                     f.rewritePath(gatewayPath + "(?<servicePath>.*)", "/${servicePath}"))
