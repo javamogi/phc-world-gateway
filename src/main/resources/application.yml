@@ -39,6 +39,12 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh, health, beans
+
 route:
   user-api:
     v1:
