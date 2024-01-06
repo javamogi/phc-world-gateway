@@ -1,5 +1,6 @@
 package com.phcworldgateway.config;
 
+import com.phcworldgateway.filter.AuthorizationHeaderFilter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
@@ -16,7 +17,7 @@ public class UserApiRouteLocator {
     private final String gatewayPath = "/providers/user-api/";
 
     @Bean
-    public RouteLocator userRouteLocator(RouteLocatorBuilder builder){
+    public RouteLocator userRouteLocator(RouteLocatorBuilder builder, AuthorizationHeaderFilter authorizationHeaderFilter){
         return builder.routes()
                 .route("user-api-service",
                         r -> r.method(HttpMethod.POST)
@@ -24,7 +25,8 @@ public class UserApiRouteLocator {
                                 .path(gatewayPath + "users/login")
                                 .filters(f ->
                                     f.rewritePath(gatewayPath + "(?<servicePath>.*)", "/${servicePath}")
-                                            .removeResponseHeader("Cookie"))
+                                            .removeResponseHeader("Cookie")
+                                )
                                 .uri(userBaseUrl))
                 .route("user-api-service",
                         r -> r.method(HttpMethod.POST)
@@ -37,7 +39,9 @@ public class UserApiRouteLocator {
                 .route("user-api-service",
                         r -> r.path(gatewayPath + "users/**")
                                 .filters(f ->
-                                        f.rewritePath(gatewayPath + "(?<servicePath>.*)", "/${servicePath}"))
+                                        f.rewritePath(gatewayPath + "(?<servicePath>.*)", "/${servicePath}")
+                                                .filter(authorizationHeaderFilter.apply(new AuthorizationHeaderFilter.Config()))
+                                )
                                 .uri(userBaseUrl))
                 .route("user-api-service",
                         r -> r.path(gatewayPath + "actuator/**")
