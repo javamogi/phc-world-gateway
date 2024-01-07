@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: phc-world-gateway
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: guest
+    password: guest
   cloud:
     gateway:
 #      httpclient:
@@ -43,7 +48,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh, health, beans
+        include: refresh, health, beans, httpexchanges, busrefresh
 
 route:
   user-api:
