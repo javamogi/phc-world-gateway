@@ -9,8 +9,8 @@ spring:
     port: 5672
     username: guest
     password: guest
-  cloud:
-    gateway:
+#  cloud:
+#    gateway:
 #      httpclient:
 #        connect-timeout: 1000
 #        response-timeout: 5s
@@ -54,3 +54,6 @@ route:
   user-api:
     v1:
       base-url: lb://USER-API-SERVICE
+  board-api:
+    v1:
+      base-url: lb://BOARD-API-SERVICE
