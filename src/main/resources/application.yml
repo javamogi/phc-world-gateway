@@ -57,3 +57,6 @@ route:
   board-api:
     v1:
       base-url: lb://BOARD-API-SERVICE
+  answer-api:
+    v1:
+      base-url: lb://ANSWER-API-SERVICE

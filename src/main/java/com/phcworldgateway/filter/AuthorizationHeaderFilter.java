@@ -22,6 +22,7 @@ import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.util.Base64;
 
 @Component
 @Slf4j
@@ -47,7 +48,9 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
             String token = authorizationHeader.replace("Bearer ", "");
 
             try {
-                byte[] keyBytes = Decoders.BASE64.decode(env.getProperty("jwt.secret"));
+                String secret = env.getProperty("jwt.secret");
+                String keyBase64Encoded = Base64.getEncoder().encodeToString(secret.getBytes());
+                byte[] keyBytes = Decoders.BASE64.decode(keyBase64Encoded);
                 Key key = Keys.hmacShaKeyFor(keyBytes);
                 Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
